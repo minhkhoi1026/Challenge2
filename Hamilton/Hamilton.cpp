@@ -94,7 +94,7 @@ bool isHamiltonianPath(int u, int cnt, adj_list& graph_list,
 }
 
 // check if given graph (store in adjacency list graph_list)
-// have Hamiltonian cycle
+// have Hamiltonian path
 bool isHavingHamiltonianPath(adj_list& graph_list) {
 	int n = graph_list.size() - 1;
 	// create adjacency matrix from adjacency list
