@@ -1,31 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
-
-using namespace std;
-
-typedef vector<vector<pair<int, int>>> adj_list;
-
-/*---------UTILITIY FUNCTION---------*/
-
-// Utility function to read input from given filename
-adj_list readInputFile(const string filename) {
-	ifstream in(filename);
-	// number of vertex
-	int n, u, v, w;
-	in >> n;
-	// read input to get adjacency list
-	adj_list graph_list(n + 1);
-	while (in >> u) {
-		in >> v >> w;
-		graph_list[u].push_back({ v, w });
-		graph_list[v].push_back({ u, w });
-	}
-	in.close();
-	return 	graph_list;
-}
+#include "Hamilton.h"
 
 /*---------HAMILTONIAN CYCLE---------*/
 
@@ -104,18 +77,4 @@ bool isHavingHamiltonianPath(adj_list& graph_list) {
 			graph_matrix[u][e.first] = true;
 	vector<bool> visited(n + 1, false);
 	return isHamiltonianPath(1, 1, graph_list, graph_matrix, visited);
-}
-
-/*---------MAIN---------*/
-
-int main() {
-	string filename;
-	cin >> filename;
-	adj_list graph_list = readInputFile(filename);
-	cout << "Have Hamiltonian Cycle: ";
-	cout << int(isHavingHamiltonianCycle(graph_list)) << "\n";
-
-	cout << "Have Hamiltonian Path: ";
-	cout << int(isHavingHamiltonianPath(graph_list));
-	return 0;
 }

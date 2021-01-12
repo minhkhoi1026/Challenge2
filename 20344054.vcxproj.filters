@@ -15,8 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Hamilton.cpp">
+    <ClCompile Include="20344054.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hamilton\Hamilton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TSP\TSP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Hamilton\Hamilton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TSP\TSP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

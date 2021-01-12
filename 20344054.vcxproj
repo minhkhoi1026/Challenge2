@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1919375a-2eca-4d13-b724-67053ca04892}</ProjectGuid>
-    <RootNamespace>Hamilton</RootNamespace>
+    <ProjectGuid>{08f3e27b-1e68-42b9-a0f8-477e52ffc529}</ProjectGuid>
+    <RootNamespace>My20344054</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Hamilton.cpp" />
+    <ClCompile Include="20344054.cpp" />
+    <ClCompile Include="Hamilton\Hamilton.cpp" />
+    <ClCompile Include="TSP\TSP.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="Hamilton\Hamilton.h" />
+    <ClInclude Include="TSP\TSP.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
