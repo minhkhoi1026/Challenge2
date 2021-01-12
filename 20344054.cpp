@@ -17,6 +17,7 @@ enum Action {
 };
 
 Action resolveAction(string input) {
+	//Lowercase input to read some injection input like hPaTh or HpATh
 	for (auto& c : input)
 	{
 		c = tolower(c);
@@ -31,12 +32,12 @@ Action resolveAction(string input) {
 /*---------IN-OUT FUNCTION---------*/
 
 // Utility function to read input from given filename
-pair<int,adj_list> readInputFile(const string filename) {
+adj_list readInputFile(const string filename) {
 	ifstream in(filename);
 	if (!in) {
-		cerr << "Read Input Error!";
+		cerr << "Read Input Error!\n";
 		adj_list empty_list;
-		return make_pair(-1,empty_list);
+		return empty_list;
 	}
 	// number of vertex
 	int n, u, v, w;
@@ -49,7 +50,7 @@ pair<int,adj_list> readInputFile(const string filename) {
 		graph_list[v].push_back({ u, w });
 	}
 	in.close();
-	return make_pair(n,graph_list);
+	return graph_list;
 }
 
 
@@ -67,26 +68,42 @@ int main(int argc, char* argv[])
 	}
 	arg_path.pop_back();
 	int n;
-	adj_list graph_list;
-	pair<int, adj_list> input = readInputFile(arg_path);
-	if (input.first == -1) {
+	adj_list graph_list = readInputFile(arg_path);
+	if (graph_list.size() == 0) {
 		cerr << "Can't read file at "<<arg_path<<'\n';
 		return 2;
 	}
-	n = input.first;
-	graph_list = input.second;
 	switch (resolveAction(arg_act))
 	{
 		case HPath: {
-			isHavingHamiltonianPath(graph_list);
+			if (isHavingHamiltonianPath(graph_list)) {
+				cout << "Yes";
+			}
+			else {
+				cout << "No";
+			}
 			break;
 		}
 		case HCycle: {
-			isHavingHamiltonianCycle(graph_list);
+			if (isHavingHamiltonianCycle(graph_list)) {
+				cout << "Yes";
+			}
+			else {
+				cout << "No";
+			}
 			break;
 		}
 		case TSP: {
-			// Code Later
+			if (graph_list.size() < 15)
+				if (!isHavingHamiltonianCycle(graph_list)) {
+					cout << "-1";
+					return 0;
+				}
+				pair<int,vector<int>> Res = TSPUsingBitmaskDP(graph_list);
+				for (auto u : Res.second) {
+					cout << u << " ";
+				}
+				cout << '\n' << Res.first;
 			break;
 		}
 		case Wrong_Action: {
@@ -94,6 +111,5 @@ int main(int argc, char* argv[])
 			return 3;
 		}
 	}
-
 	return 0;
 }

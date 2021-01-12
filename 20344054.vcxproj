@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="20344054.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Hamilton\Hamilton.cpp" />
     <ClCompile Include="TSP\TSP.cpp" />
   </ItemGroup>
