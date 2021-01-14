@@ -5,17 +5,15 @@
 // backtracking to get all cycle of graph, then check each of them
 bool isHamiltonianCycle(int u, int cnt, adj_list& graph_list,
 	adj_matrix& graph_matrix, vector<bool>& visited) {
-	visited[u] = true; // mark u as visited
 	// size of graph, graph_list[0..n] so we need to substract 1
 	int n = graph_list.size() - 1;
 
 	// in the n-th vertex in path we just have to check
 	// if therre is a edge from n-th vertex in path to 1
 	if (cnt == n) {
-		visited[u] = false;
 		return ((graph_matrix[u][1] > 0) ? true : false);
 	}
-
+	visited[u] = true; // mark u as visited
 	// backtracking
 	for (pair<int,int> e: graph_list[u]) {
 		int v = e.first;
@@ -42,15 +40,13 @@ bool isHavingHamiltonianCycle(adj_list& graph_list) {
 // backtracking to get all cycle of graph, then check each of them
 bool isHamiltonianPath(int u, int cnt, adj_list& graph_list,
 	adj_matrix& graph_matrix, vector<bool>& visited) {
-	visited[u] = true; // mark u as visited
 	// size of graph, graph_list[0..n] so we need to substract 1
 	int n = graph_list.size() - 1;
 
 	// in the n-th vertex in path we return true
 	if (cnt == n)
-		visited[u] = false;
 		return true;
-
+	visited[u] = true; // mark u as visited
 	// backtracking
 	for (pair<int, int> e : graph_list[u]) {
 		int v = e.first;
