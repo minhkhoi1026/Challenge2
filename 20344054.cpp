@@ -40,8 +40,13 @@ adj_list readInputFile(const string filename) {
 		return empty_list;
 	}
 	// number of vertex
-	int n, u, v, w;
+	int n=0, u, v, w;
 	in >> n;
+	if (n == 0) {
+		cerr << "Read Empty File Error!\n";
+		adj_list empty_list;
+		return empty_list;
+	}
 	// read input to get adjacency list
 	adj_list graph_list(n + 1);
 	while (in >> u) {
@@ -60,6 +65,7 @@ int main(int argc, char* argv[])
 		cerr << "Not enough arguments!";
 		return 1;
 	}
+	
 	string arg_act, arg_path;
 	arg_act += argv[1];
 	for (int i = 2; i < argc; i++) {
@@ -67,7 +73,6 @@ int main(int argc, char* argv[])
 		arg_path += " ";
 	}
 	arg_path.pop_back();
-	int n;
 	adj_list graph_list = readInputFile(arg_path);
 	if (graph_list.size() == 0) {
 		cerr << "Can't read file at "<<arg_path<<'\n';
@@ -94,16 +99,15 @@ int main(int argc, char* argv[])
 			break;
 		}
 		case TSP: {
-			if (graph_list.size() < 15)
-				if (!isHavingHamiltonianCycle(graph_list)) {
-					cout << "-1";
-					return 0;
-				}
-				pair<int,vector<int>> Res = TSPUsingBitmaskDP(graph_list);
-				for (auto u : Res.second) {
-					cout << u << " ";
-				}
-				cout << '\n' << Res.first;
+			if (!isHavingHamiltonianCycle(graph_list)) {
+				cout << "-1";
+				return 0;
+			}
+			pair<int, vector<int>> Res = TSPUsingBitmaskDP(graph_list);
+			for (auto u : Res.second) {
+				cout << u << " ";
+			}
+			cout << '\n' << Res.first;
 			break;
 		}
 		case Wrong_Action: {
