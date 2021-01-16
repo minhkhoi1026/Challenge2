@@ -99,14 +99,11 @@ int main(int argc, char* argv[])
 			break;
 		}
 		case TSP: {
-			if (!isHavingHamiltonianCycle(graph_list)) {
-				cout << "-1";
-				return 0;
-			}
 			pair<int, vector<int>> Res = TSPUsingBitmaskDP(graph_list);
-			for (auto u : Res.second) {
-				cout << u << " ";
-			}
+			if (Res.first!=-1)
+				for (auto u : Res.second) {
+					cout << u << " ";
+				}
 			cout << '\n' << Res.first;
 			break;
 		}

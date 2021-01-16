@@ -52,7 +52,7 @@ bool isHamiltonianPath(int u, int cnt, adj_list& graph_list,
 		int v = e.first;
 		if (!visited[v]) { // have not been visited yet
 			// if found one Hamiltonian Path then break, no need to found any more.
-			if (isHamiltonianCycle(v, cnt + 1, graph_list, graph_matrix, visited))
+			if (isHamiltonianPath(v, cnt + 1, graph_list, graph_matrix, visited))
 				return true;
 		}
 	}

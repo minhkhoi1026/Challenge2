@@ -24,7 +24,7 @@ pair<int,vector<int>> TSPUsingBitmaskDP(adj_list& graph_list) { //Solve Travelli
     int numstate = (1 << n) - 1;
     vector<vector<int>> State(numstate+1, vector<int>(graph_list.size()+1, INTMAX)); // Create A DP Array with numstate is the number of state when using bitmask
     vector<vector<int>> Parent(numstate+1, vector<int>(graph_list.size()+1, 1));
-    for (int i = 2; i <= numstate; i++) {
+    for (int i = 3; i <= numstate; i++) {
         if ((i & 1) == 0) continue;
         if (SizeofState(i, numstate) == 2) { //If only have 2 edge -> 1 - i | Always start at 1
             for (int j = 2; j <= n; j++) {
@@ -34,13 +34,13 @@ pair<int,vector<int>> TSPUsingBitmaskDP(adj_list& graph_list) { //Solve Travelli
             }
         }
         else {
-            if (SizeofState(i, numstate) > 2) { //If 
+            if (SizeofState(i, numstate) > 2) { //If state have more than edge -> add one edge and check minimum if State have SizeofState edge and end at j
                 for (int j = 2; j <= n; j++) {
                     if (CheckBit(i, j))
                     for (int k = 2; k <= n; k++){
                         if (j == k) continue;
                         if (CheckBit(i, k) && graph_matrix[k][j] != 0 ) {
-                            if (State[i][j] >= (State[OffBit(i,j)][k] + graph_matrix[k][j])) {
+                            if (State[i][j] >= (State[OffBit(i,j)][k] + graph_matrix[k][j])) { //Update Min Cost of state end at j
                                 State[i][j] = State[OffBit(i,j)][k] + graph_matrix[k][j];
                                 Parent[i][j] = k;
                             }
@@ -51,13 +51,17 @@ pair<int,vector<int>> TSPUsingBitmaskDP(adj_list& graph_list) { //Solve Travelli
         }
     }
     int MinVal = INTMAX;
-    int MinIndex;
+    int MinIndex = -1;
     for (int i = 2; i <= n; i++) {
         if (graph_matrix[i][1]!=0)
             if (State[numstate][i] + graph_matrix[i][1] < MinVal) {
                 MinVal = State[numstate][i] + graph_matrix[i][1];
                 MinIndex = i;
             }
+    }
+    if (MinIndex == -1) {
+        vector<int> Res;
+        return make_pair(MinIndex, Res);
     }
     vector<int> Res;
     Res.push_back(1);
